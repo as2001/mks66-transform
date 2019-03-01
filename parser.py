@@ -39,24 +39,24 @@ def parse_file( fname, points, transform, screen, color ):
     i = 0
     while i < len(inp):
         if inp[i] == "line":
-            add_edge(points,inp[i+1],inp[i+2],inp[i+3],inp[i+4],inp[i+5],inp[i+6])
+            add_edge(points,int(inp[i+1]),int(inp[i+2]),int(inp[i+3]),int(inp[i+4]),int(inp[i+5]),int(inp[i+6]))
             i += 7
         elif inp[i] == "indent":
             ident(transform)
             i += 1
         elif inp[i] == "scale":
-            matrix_mult(make_scale(inp[i+1],inp[i+2],inp[i+3]),transform)
+            matrix_mult(make_scale(int(inp[i+1]),int(inp[i+2]),int(inp[i+3])),transform)
             i += 4
-        elif inp[i] == translate:
+        elif inp[i] == "translate":
             matrix_mult(make_translate(inp[i+1],inp[i+2],inp[i+3]),transform)
             i += 4
-        elif inp[i] == rotate:
+        elif inp[i] == "rotate":
             if inp[i+1] == "x":
-                matrix_mult(make_rotX(inp[i+2]),transform)
+                matrix_mult(make_rotX(int(inp[i+2])),transform)
             elif inp[i+1] == "y":
-                matrix_mult(make_rotY(inp[i+2]),transform)
+                matrix_mult(make_rotY(int(inp[i+2])),transform)
             else:
-                matrix_mult(make_rotZ(inp[i+2]),transform)
+                matrix_mult(make_rotZ(int(inp[i+2])),transform)
             i += 3
         elif inp[i] == "apply":
             matrix_mult(transform,points)
