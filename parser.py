@@ -58,4 +58,20 @@ def parse_file( fname, points, transform, screen, color ):
             else:
                 matrix_mult(make_rotZ(inp[i+2]),transform)
             i += 3
-    pass
+        elif inp[i] == "apply":
+            matrix_mult(transform,points)
+            i += 1
+        elif inp[i] == "display":
+            clear_screen(screen)
+            draw_lines(points,screen,color)
+            display(screen)
+            i += 1
+        elif inp[i] == "save":
+            clear_screen(screen)
+            draw_lines(points,screen,color)
+            display(screen)
+            save_extension(screen,inp[i+1])
+            i += 2
+        else:
+            f.close()
+            pass
