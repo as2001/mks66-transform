@@ -41,14 +41,14 @@ def parse_file( fname, points, transform, screen, color ):
         if inp[i] == "line":
             add_edge(points,int(inp[i+1]),int(inp[i+2]),int(inp[i+3]),int(inp[i+4]),int(inp[i+5]),int(inp[i+6]))
             i += 7
-        elif inp[i] == "indent":
+        elif inp[i] == "ident":
             ident(transform)
             i += 1
         elif inp[i] == "scale":
             matrix_mult(make_scale(int(inp[i+1]),int(inp[i+2]),int(inp[i+3])),transform)
             i += 4
         elif inp[i] == "translate":
-            matrix_mult(make_translate(inp[i+1],inp[i+2],inp[i+3]),transform)
+            matrix_mult(make_translate(int(inp[i+1]),int(inp[i+2]),int(inp[i+3])),transform)
             i += 4
         elif inp[i] == "rotate":
             if inp[i+1] == "x":
@@ -60,6 +60,9 @@ def parse_file( fname, points, transform, screen, color ):
             i += 3
         elif inp[i] == "apply":
             matrix_mult(transform,points)
+            for x in range(len(points)):
+                for y in range(4):
+                    points[x][y] = int(points[x][y])
             i += 1
         elif inp[i] == "display":
             clear_screen(screen)
@@ -69,7 +72,6 @@ def parse_file( fname, points, transform, screen, color ):
         elif inp[i] == "save":
             clear_screen(screen)
             draw_lines(points,screen,color)
-            display(screen)
             save_extension(screen,inp[i+1])
             i += 2
         else:

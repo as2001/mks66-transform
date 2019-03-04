@@ -52,7 +52,7 @@ def make_rotZ( theta ):
     ret[0][0] = math.cos(theta)
     ret[0][1] = math.sin(theta)
     ret[1][0] = -math.sin(theta)
-    ret[1][1] = -math.cos(theta)
+    ret[1][1] = math.cos(theta)
     return ret
 
 #print the matrix such that it looks like
